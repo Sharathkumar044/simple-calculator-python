@@ -4,6 +4,7 @@ pipeline {
     environment {
         FLASK_APP = 'app.py'
         FLASK_ENV = 'development'
+        FLASK_PORT = '5000'  // Change this to the port your Flask app is using
     }
 
     stages {
@@ -24,7 +25,6 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Run your tests (replace with your actual test command)
                     sh 'python3 -m unittest discover -s . -p "test*.py" -v'
                 }
             }
@@ -33,7 +33,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'python3 app.py &'
+                    // Start the Flask application in the background
+                    sh "nohup python3 -m flask run --host=0.0.0.0 --port=${FLASK_PORT} > /dev/null 2>&1 &"
+                    sleep 10  // Give Flask some time to start (adjust as needed)
                 }
             }
         }
