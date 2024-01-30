@@ -19,8 +19,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install Python and pip
-                    sh 'apt-get update && apt-get install -y python3 python3-pip'
+                    // Install Python and pip for Amazon Linux
+                    sh 'sudo yum install -y python3 python3-pip'
                     // Install required Python packages
                     sh 'pip3 install -r requirements.txt'
                 }
