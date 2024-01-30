@@ -19,8 +19,10 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
+                    // Install Python and pip
+                    sh 'apt-get update && apt-get install -y python3 python3-pip'
                     // Install required Python packages
-                    sh 'pip install -r requirements.txt'
+                    sh 'pip3 install -r requirements.txt'
                 }
             }
         }
@@ -29,7 +31,7 @@ pipeline {
             steps {
                 script {
                     // Run your tests (replace with your actual test command)
-                    sh 'python -m unittest discover'
+                    sh 'python3 -m unittest discover'
                 }
             }
         }
@@ -38,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Start the Flask application
-                    sh 'python app.py &'
+                    sh 'python3 app.py &'
                 }
             }
         }
@@ -47,7 +49,7 @@ pipeline {
             steps {
                 script {
                     // Perform additional tests after deployment (if needed)
-                    sh 'python -m unittest additional_tests.py'
+                    sh 'python3 -m unittest additional_tests.py'
                 }
             }
         }
@@ -71,7 +73,7 @@ pipeline {
         always {
             script {
                 // Clean up resources (stop the Flask application)
-                sh 'pkill -f "python app.py"'
+                sh 'pkill -f "python3 app.py"'
             }
         }
     }
