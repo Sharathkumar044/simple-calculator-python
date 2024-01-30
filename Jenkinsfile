@@ -9,18 +9,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    // Use 'git' command to checkout the code from the 'feature' branch
-                    git branch: 'feature', url: 'https://github.com/Sharathkumar044/simple-calculator-python.git'
-                }
+                // Check out your source code from version control
+                git branch: 'feature', url: 'https://github.com/Sharathkumar044/simple-calculator-python.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install Python and pip for Amazon Linux without password prompt
-                    sh 'echo "password" | sudo -S yum install -y python3 python3-pip'
                     // Install required Python packages
                     sh 'pip3 install -r requirements.txt'
                 }
