@@ -9,8 +9,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Check out your source code from version control
-                git branch: 'feature', url: 'https://github.com/Sharathkumar044/simple-calculator-python.git'
+                script {
+                    // Use 'git' command to checkout the code from the 'feature' branch
+                    git branch: 'feature', url: 'https://github.com/Sharathkumar044/simple-calculator-python.git'
+                }
             }
         }
 
