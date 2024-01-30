@@ -58,6 +58,18 @@
                 <li>{{ entry }}</li>
             {% endfor %}
         </ul>
+
+        <!-- Add this part for dynamic logo -->
+        {% if operation == 'add' %}
+            <img src="{{ url_for('static', filename='addition_logo.png') }}" alt="Addition Logo" class="operation-logo">
+        {% elif operation == 'subtract' %}
+            <img src="{{ url_for('static', filename='subtraction_logo.png') }}" alt="Subtraction Logo" class="operation-logo">
+        {% elif operation == 'multiply' %}
+            <img src="{{ url_for('static', filename='multiplication_logo.png') }}" alt="Multiplication Logo" class="operation-logo">
+        {% elif operation == 'divide' %}
+            <img src="{{ url_for('static', filename='division_logo.png') }}" alt="Division Logo" class="operation-logo">
+        {% endif %}
+
     </div>
     <script>
         // Add a script for dynamic update of selected function
