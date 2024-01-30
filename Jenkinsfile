@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Check out your source code from version control
                 git branch: 'feature', url: 'https://github.com/Sharathkumar044/simple-calculator-python.git'
             }
         }
@@ -17,7 +16,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install required Python packages
                     sh 'pip3 install -r requirements.txt'
                 }
             }
@@ -26,8 +24,11 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    // Manually add additional_tests.py to the workspace
+                    sh 'cp /path/to/additional_tests.py .'
+
                     // Run your tests (replace with your actual test command)
-                    sh 'python3 -m unittest discover'
+                    sh 'python3 -m unittest discover -s . -p "test*.py" -v'
                 }
             }
         }
@@ -35,7 +36,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Start the Flask application
                     sh 'python3 app.py &'
                 }
             }
@@ -44,7 +44,10 @@ pipeline {
         stage('Post Deployment Tests') {
             steps {
                 script {
-                    // Perform additional tests after deployment (if needed)
+                    // Manually add additional_tests.py to the workspace
+                    sh 'cp /path/to/additional_tests.py .'
+
+                    // Perform additional tests after deployment
                     sh 'python3 -m unittest additional_tests.py'
                 }
             }
@@ -54,21 +57,18 @@ pipeline {
     post {
         success {
             script {
-                // Notify on success (replace with your actual notification method)
                 echo 'Deployment successful! Notify your team.'
             }
         }
 
         failure {
             script {
-                // Notify on failure and clean up (replace with your actual notification and cleanup methods)
                 echo 'Deployment failed! Notify your team.'
             }
         }
 
         always {
             script {
-                // Clean up resources (stop the Flask application)
                 sh 'pkill -f "python3 app.py"'
             }
         }
