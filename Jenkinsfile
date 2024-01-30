@@ -47,24 +47,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            script {
-                echo 'Deployment successful! Notify your team.'
-            }
-        }
-
-        failure {
-            script {
-                echo 'Deployment failed! Notify your team.'
-            }
-        }
-
-        always {
-            script {
-                sh 'pkill -f "python3 app.py"'
-            }
-        }
-    }
 }
