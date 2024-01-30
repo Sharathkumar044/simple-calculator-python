@@ -24,9 +24,6 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Manually add additional_tests.py to the workspace
-                    sh 'cp /path/to/additional_tests.py .'
-
                     // Run your tests (replace with your actual test command)
                     sh 'python3 -m unittest discover -s . -p "test*.py" -v'
                 }
@@ -44,9 +41,6 @@ pipeline {
         stage('Post Deployment Tests') {
             steps {
                 script {
-                    // Manually add additional_tests.py to the workspace
-                    sh 'cp /path/to/additional_tests.py .'
-
                     // Perform additional tests after deployment
                     sh 'python3 -m unittest additional_tests.py'
                 }
