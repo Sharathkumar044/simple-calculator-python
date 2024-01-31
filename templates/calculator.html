@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f8f9fa;
             text-align: center;
             margin-top: 50px;
         }
@@ -27,11 +27,11 @@
         }
 
         h1 {
-            color: #007bff;
+            color: #343a40;
         }
 
         .form-label {
-            color: #555555;
+            color: #343a40;
         }
 
         .form-control {
@@ -47,6 +47,7 @@
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
+            width: 100%;
         }
 
         .btn-primary:hover {
@@ -62,13 +63,17 @@
             margin-top: 20px;
             color: #555555;
         }
+
+        .history p {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container calculator">
-        <h1 class="mb-4">Calculator</h1>
+        <h1 class="mb-4">Simple Calculator</h1>
 
         <form action="/calculate" method="post">
             <div class="mb-3">
