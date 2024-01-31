@@ -42,7 +42,7 @@
     <script>
         document.getElementById('scientificFunc').addEventListener('change', function() {
             var selectedFunc = this.value;
-            document.getElementById('selectedFunction').innerText = selectedFunc;
+            document.getElementById('selectedFunction').innerText = selectedFunc || 'None';
         });
     </script>
 </body>
