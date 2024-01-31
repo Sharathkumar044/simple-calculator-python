@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     sh "nohup python3 -m flask run --host=0.0.0.0 --port=${FLASK_PORT} > /dev/null 2>&1 &"
-                    sleep 30
+                    sleep 40
                 }
             }
         }
