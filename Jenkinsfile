@@ -4,7 +4,7 @@ pipeline {
     environment {
         FLASK_APP = 'app.py'
         FLASK_ENV = 'development'
-        FLASK_PORT = '5000'  // Change this to the port your Flask app is using
+        FLASK_PORT = '5000'
     }
 
     stages {
@@ -33,9 +33,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Start the Flask application in the background
                     sh "nohup python3 -m flask run --host=0.0.0.0 --port=${FLASK_PORT} > /dev/null 2>&1 &"
-                    sleep 10  // Give Flask some time to start (adjust as needed)
+                    sleep 30
                 }
             }
         }
@@ -43,9 +42,22 @@ pipeline {
         stage('Post Deployment Tests') {
             steps {
                 script {
-                    // Perform additional tests after deployment
                     sh 'python3 -m unittest additional_tests.py'
                 }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                // Add any cleanup or post-build steps here
+                echo 'Jenkins pipeline completed successfully!'
+            }
+        }
+        failure {
+            script {
+                echo 'Jenkins pipeline failed!'
             }
         }
     }
